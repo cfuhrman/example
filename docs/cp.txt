@@ -1,48 +1,48 @@
 CP(1)                   NetBSD General Commands Manual                   CP(1)
 
-NNAAMMEE
-     ccpp -- copy files
+NAME
+     cp -- copy files
 
-SSYYNNOOPPSSIISS
-     ccpp [--RR [--HH | --LL | --PP]] [--ff | --ii] [--aallNNppvv] _s_o_u_r_c_e___f_i_l_e _t_a_r_g_e_t___f_i_l_e
-     ccpp [--RR [--HH | --LL | --PP]] [--ff | --ii] [--aallNNppvv] _s_o_u_r_c_e___f_i_l_e _._._.
-        _t_a_r_g_e_t___d_i_r_e_c_t_o_r_y
+SYNOPSIS
+     cp [-R [-H | -L | -P]] [-f | -i] [-alNpv] source_file target_file
+     cp [-R [-H | -L | -P]] [-f | -i] [-alNpv] source_file ...
+        target_directory
 
-DDEESSCCRRIIPPTTIIOONN
-     In the first synopsis form, the ccpp utility copies the contents of the
-     _s_o_u_r_c_e___f_i_l_e to the _t_a_r_g_e_t___f_i_l_e.  In the second synopsis form, the con-
-     tents of each named _s_o_u_r_c_e___f_i_l_e is copied to the destination
-     _t_a_r_g_e_t___d_i_r_e_c_t_o_r_y.  The names of the files themselves are not changed.  If
-     ccpp detects an attempt to copy a file to itself, the copy will fail.
+DESCRIPTION
+     In the first synopsis form, the cp utility copies the contents of the
+     source_file to the target_file.  In the second synopsis form, the con-
+     tents of each named source_file is copied to the destination
+     target_directory.  The names of the files themselves are not changed.  If
+     cp detects an attempt to copy a file to itself, the copy will fail.
 
      The following options are available:
 
-     --aa    Archive mode.  Same as --RRppPP.
+     -a    Archive mode.  Same as -RpP.
 
-     --ff    For each existing destination pathname, attempt to overwrite it.
+     -f    For each existing destination pathname, attempt to overwrite it.
            If permissions do not allow copy to succeed, remove it and create a
-           new file, without prompting for confirmation.  (The --ii option is
-           ignored if the --ff option is specified.)
+           new file, without prompting for confirmation.  (The -i option is
+           ignored if the -f option is specified.)
 
-     --HH    If the --RR option is specified, symbolic links on the command line
+     -H    If the -R option is specified, symbolic links on the command line
            are followed.  (Symbolic links encountered in the tree traversal
            are not followed.)
 
-     --ii    Causes ccpp to write a prompt to the standard error output before
+     -i    Causes cp to write a prompt to the standard error output before
            copying a file that would overwrite an existing file.  If the
            response from the standard input begins with the character `y', the
            file copy is attempted.
 
-     --LL    If the --RR option is specified, all symbolic links are followed.
+     -L    If the -R option is specified, all symbolic links are followed.
 
-     --ll    Create hard links to regular files in a hierarchy instead of copy-
+     -l    Create hard links to regular files in a hierarchy instead of copy-
            ing.
 
-     --NN    When used with --pp, don't copy file flags.
+     -N    When used with -p, don't copy file flags.
 
-     --PP    No symbolic links are followed.  This is the default.
+     -P    No symbolic links are followed.  This is the default.
 
-     --pp    Causes ccpp to preserve in the copy as many of the modification time,
+     -p    Causes cp to preserve in the copy as many of the modification time,
            access time, file flags, file mode, user ID, group ID, and extended
            attributes, as allowed by permissions.
 
@@ -60,27 +60,27 @@ DDEESSCCRRIIPPTTIIOONN
 
            Extended attributes from all accessible namespaces are copied; oth-
            ers are ignored.  If an error occurs during this copy, a message is
-           displayed and ccpp skips the other extended attributes for that file.
+           displayed and cp skips the other extended attributes for that file.
 
-     --RR    If _s_o_u_r_c_e___f_i_l_e designates a directory, ccpp copies the directory and
+     -R    If source_file designates a directory, cp copies the directory and
            the entire subtree connected at that point.  This option also
            causes symbolic links to be copied, rather than followed, and for
-           ccpp to create special files rather than copying them as normal
+           cp to create special files rather than copying them as normal
            files.  Created directories have the same mode as the corresponding
            source directory, unmodified by the process's umask.
 
-     --vv    Cause ccpp to be verbose, showing files as they are copied.
+     -v    Cause cp to be verbose, showing files as they are copied.
 
      For each destination file that already exists, its contents are overwrit-
      ten if permissions allow, but its mode, user ID, and group ID are
      unchanged.
 
-     In the second synopsis form, _t_a_r_g_e_t___d_i_r_e_c_t_o_r_y must exist unless there is
-     only one named _s_o_u_r_c_e___f_i_l_e which is a directory and the --RR flag is speci-
+     In the second synopsis form, target_directory must exist unless there is
+     only one named source_file which is a directory and the -R flag is speci-
      fied.
 
      If the destination file does not exist, the mode of the source file is
-     used as modified by the file mode creation mask (uummaasskk, see csh(1)).  If
+     used as modified by the file mode creation mask (umask, see csh(1)).  If
      the source file has its set user ID bit on, that bit is removed unless
      both the source file and the destination file are owned by the same user.
      If the source file has its set group ID bit on, that bit is removed
@@ -91,33 +91,33 @@ DDEESSCCRRIIPPTTIIOONN
 
      Appropriate permissions are required for file creation or overwriting.
 
-     Symbolic links are always followed unless the --RR flag is set, in which
-     case symbolic links are not followed, by default.  The --HH or --LL flags (in
-     conjunction with the --RR flag), as well as the --PP flag cause symbolic
-     links to be followed as described above.  The --HH and --LL options are
-     ignored unless the --RR option is specified.  In addition, these options
+     Symbolic links are always followed unless the -R flag is set, in which
+     case symbolic links are not followed, by default.  The -H or -L flags (in
+     conjunction with the -R flag), as well as the -P flag cause symbolic
+     links to be followed as described above.  The -H and -L options are
+     ignored unless the -R option is specified.  In addition, these options
      override each other and the command's actions are determined by the last
      one specified.
 
-EEXXIITT SSTTAATTUUSS
-     The ccpp utility exits 0 on success, and >0 if an error occurs.
+EXIT STATUS
+     The cp utility exits 0 on success, and >0 if an error occurs.
 
-CCOOMMPPAATTIIBBIILLIITTYY
-     Historic versions of the ccpp utility had a --rr option.  This implementation
+COMPATIBILITY
+     Historic versions of the cp utility had a -r option.  This implementation
      supports that option, however, its use is strongly discouraged, as it
      does not correctly copy special files, symbolic links or fifo's.
 
-SSEEEE AALLSSOO
+SEE ALSO
      mv(1), rcp(1), umask(2), fts(3), symlink(7)
 
-SSTTAANNDDAARRDDSS
-     The ccpp utility is expected to be IEEE Std 1003.2 (``POSIX.2'') compati-
+STANDARDS
+     The cp utility is expected to be IEEE Std 1003.2 (``POSIX.2'') compati-
      ble.
 
-     The --aa and --ll flags are non-standard extensions.  They are intended to be
+     The -a and -l flags are non-standard extensions.  They are intended to be
      compatible with the same options which other implementations, namely GNU
      coreutils and FreeBSD, of this utility have.
 
-     The --vv option is an extension to IEEE Std 1003.2 (``POSIX.2'').
+     The -v option is an extension to IEEE Std 1003.2 (``POSIX.2'').
 
 NetBSD 6.0                      August 3, 2011                      NetBSD 6.0
