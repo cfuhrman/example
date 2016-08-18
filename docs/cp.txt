@@ -1,17 +1,17 @@
-CP(1)                   NetBSD General Commands Manual                   CP(1)
+CP(1)                       General Commands Manual                      CP(1)
 
 NAME
      cp -- copy files
 
 SYNOPSIS
      cp [-R [-H | -L | -P]] [-f | -i] [-alNpv] source_file target_file
-     cp [-R [-H | -L | -P]] [-f | -i] [-alNpv] source_file ...
-        target_directory
+     cp [-R [-H | -L | -P]] [-f | -i] [-alNpv]
+        source_file ... target_directory
 
 DESCRIPTION
      In the first synopsis form, the cp utility copies the contents of the
-     source_file to the target_file.  In the second synopsis form, the con-
-     tents of each named source_file is copied to the destination
+     source_file to the target_file.  In the second synopsis form, the
+     contents of each named source_file is copied to the destination
      target_directory.  The names of the files themselves are not changed.  If
      cp detects an attempt to copy a file to itself, the copy will fail.
 
@@ -35,8 +35,8 @@ DESCRIPTION
 
      -L    If the -R option is specified, all symbolic links are followed.
 
-     -l    Create hard links to regular files in a hierarchy instead of copy-
-           ing.
+     -l    Create hard links to regular files in a hierarchy instead of
+           copying.
 
      -N    When used with -p, don't copy file flags.
 
@@ -49,8 +49,8 @@ DESCRIPTION
            If the user ID and group ID cannot be preserved, no error message
            is displayed and the exit value is not altered.
 
-           If the source file has its set user ID bit on and the user ID can-
-           not be preserved, the set user ID bit is not preserved in the
+           If the source file has its set user ID bit on and the user ID
+           cannot be preserved, the set user ID bit is not preserved in the
            copy's permissions.  If the source file has its set group ID bit on
            and the group ID cannot be preserved, the set group ID bit is not
            preserved in the copy's permissions.  If the source file has both
@@ -58,9 +58,10 @@ DESCRIPTION
            group ID cannot be preserved, neither the set user ID or set group
            ID bits are preserved in the copy's permissions.
 
-           Extended attributes from all accessible namespaces are copied; oth-
-           ers are ignored.  If an error occurs during this copy, a message is
-           displayed and cp skips the other extended attributes for that file.
+           Extended attributes from all accessible namespaces are copied;
+           others are ignored.  If an error occurs during this copy, a message
+           is displayed and cp skips the other extended attributes for that
+           file.
 
      -R    If source_file designates a directory, cp copies the directory and
            the entire subtree connected at that point.  This option also
@@ -69,15 +70,19 @@ DESCRIPTION
            files.  Created directories have the same mode as the corresponding
            source directory, unmodified by the process's umask.
 
-     -v    Cause cp to be verbose, showing files as they are copied.
+           Note that cp copies hard linked files as separate files.  If you
+           need to preserve hard links, consider using a utility like pax(1)
+           instead.
 
-     For each destination file that already exists, its contents are overwrit-
-     ten if permissions allow, but its mode, user ID, and group ID are
+     -v    Causes cp to be verbose, showing files as they are copied.
+
+     For each destination file that already exists, its contents are
+     overwritten if permissions allow, but its mode, user ID, and group ID are
      unchanged.
 
      In the second synopsis form, target_directory must exist unless there is
-     only one named source_file which is a directory and the -R flag is speci-
-     fied.
+     only one named source_file which is a directory and the -R flag is
+     specified.
 
      If the destination file does not exist, the mode of the source file is
      used as modified by the file mode creation mask (umask, see csh(1)).  If
@@ -86,8 +91,8 @@ DESCRIPTION
      If the source file has its set group ID bit on, that bit is removed
      unless both the source file and the destination file are in the same
      group and the user is a member of that group.  If both the set user ID
-     and set group ID bits are set, all of the above conditions must be ful-
-     filled or both bits are removed.
+     and set group ID bits are set, all of the above conditions must be
+     fulfilled or both bits are removed.
 
      Appropriate permissions are required for file creation or overwriting.
 
@@ -97,7 +102,7 @@ DESCRIPTION
      links to be followed as described above.  The -H and -L options are
      ignored unless the -R option is specified.  In addition, these options
      override each other and the command's actions are determined by the last
-     one specified.
+     one specified.  The default is as if the -P option had been specified.
 
 EXIT STATUS
      The cp utility exits 0 on success, and >0 if an error occurs.
@@ -108,11 +113,11 @@ COMPATIBILITY
      does not correctly copy special files, symbolic links or fifo's.
 
 SEE ALSO
-     mv(1), rcp(1), umask(2), fts(3), symlink(7)
+     mv(1), pax(1), rcp(1), umask(2), fts(3), symlink(7)
 
 STANDARDS
-     The cp utility is expected to be IEEE Std 1003.2 (``POSIX.2'') compati-
-     ble.
+     The cp utility is expected to be IEEE Std 1003.2 (``POSIX.2'')
+     compatible.
 
      The -a and -l flags are non-standard extensions.  They are intended to be
      compatible with the same options which other implementations, namely GNU
@@ -120,4 +125,4 @@ STANDARDS
 
      The -v option is an extension to IEEE Std 1003.2 (``POSIX.2'').
 
-NetBSD 6.0                      August 3, 2011                      NetBSD 6.0
+NetBSD 7.0.1                    March 25, 2012                    NetBSD 7.0.1
