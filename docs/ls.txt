@@ -1,24 +1,27 @@
-LS(1)                   NetBSD General Commands Manual                   LS(1)
+LS(1)                       General Commands Manual                      LS(1)
 
 NAME
      ls -- list directory contents
 
 SYNOPSIS
-     ls [-AaBbCcdFfghikLlMmnopqRrSsTtuWwx1] [file ...]
+     ls [-1AaBbCcdFfghikLlMmnOoPpqRrSsTtuWwXx] [file ...]
 
 DESCRIPTION
-     For each operand that names a file of a type other than directory, ls
-     displays its name as well as any requested, associated information.  For
-     each operand that names a file of type directory, ls displays the names
-     of files contained within that directory, as well as any requested, asso-
-     ciated information.
+     For each file operand that names a file of a type other than directory,
+     ls displays its name as well as any requested, associated information.
+     For each file operand that names a file of type directory, ls displays
+     the names of files contained within that directory, as well as any
+     requested, associated information.
 
-     If no operands are given, the contents of the current directory are dis-
-     played.  If more than one operand is given, non-directory operands are
-     displayed first; directory and non-directory operands are sorted sepa-
-     rately and in lexicographical order.
+     If no operands are given, the contents of the current directory are
+     displayed.  If more than one operand is given, non-directory operands are
+     displayed first; directory and non-directory operands are sorted
+     separately and in lexicographical order.
 
      The following options are available:
+
+     -1      (The numeric digit ``one'').  Force output to be one entry per
+             line.  This is the default when output is not to a terminal.
 
      -A      List all entries except for `.' and `..'.  Always set for the
              super-user.
@@ -34,31 +37,32 @@ DESCRIPTION
              a terminal.
 
      -c      Use time when file status was last changed, instead of time of
-             last modification of the file for sorting (-t) or printing (-l).
+             last modification of the file for printing (-l) or sorting (-t).
+             Overrides -u.
 
      -d      Directories are listed as plain files (not searched recursively)
-             and symbolic links in the argument list are not followed.
+             and symbolic links in the argument list are not followed.  Turns
+             off -R if also given.
 
      -F      Display a slash (`/') immediately after each pathname that is a
              directory, an asterisk (`*') after each that is executable, an at
              sign (`@') after each symbolic link, a percent sign (`%') after
-             each whiteout, an equal sign (`=') after each socket, and a ver-
-             tical bar (`|') after each that is a FIFO.
+             each whiteout, an equal sign (`=') after each socket, and a
+             vertical bar (`|') after each that is a FIFO.
 
-     -f      Output is not sorted.
+     -f      Output is not sorted.  This option implies -a.
 
      -g      The same as -l, except that the owner is not printed.
 
-     -h      Modifies the -s and -l options, causing the sizes to be reported
+     -h      Modifies the -l and -s options, causing the sizes to be reported
              in bytes displayed in a human readable format.  Overrides -k and
              -M.
 
-     -i      For each file, print the file's file serial number (inode num-
-             ber).
+     -i      For each file, print the file's file serial number (inode
+             number).
 
-     -k      Modifies the -s option, causing the sizes to be reported in kilo-
-             bytes.  The rightmost of the -k and -h flags overrides the previ-
-             ous flag.  See also -h and -M.
+     -k      Modifies the -s option, causing the sizes to be reported in
+             kilobytes.  Overrides -h.
 
      -L      For each file, if it's a link, evaluate file information and file
              type of the referenced file and not the link itself; however
@@ -70,8 +74,8 @@ DESCRIPTION
 
      -M      Modifies the -l and -s options, causing the sizes or block counts
              reported to be separated with commas (or a locale appropriate
-             separator) resulting in a more readable output.  Overrides -h.
-             Does not override -k.
+             separator) resulting in a more readable output.  Overrides -h;
+             does not override -k.
 
      -m      Stream output format; list files across the page, separated by
              commas.
@@ -79,9 +83,14 @@ DESCRIPTION
      -n      The same as -l, except that the owner and group IDs are displayed
              numerically rather than converting to a owner or group name.
 
+     -O      Output only leaf files (not directories), eliding other ls
+             output.
+
      -o      Include the file flags in a long (-l) output.  If no file flags
-             are set, ``-'' is displayed.  (See chflags(1) for a list of pos-
-             sible flags and their meanings.)
+             are set, ``-'' is displayed.  (See chflags(1) for a list of
+             possible flags and their meanings.)
+
+     -P      Print the full pathname for each file.
 
      -p      Display a slash (`/') immediately after each pathname that is a
              directory.
@@ -89,7 +98,7 @@ DESCRIPTION
      -q      Force printing of non-printable characters in file names as the
              character `?'; this is the default when output is to a terminal.
 
-     -R      Recursively list subdirectories encountered.
+     -R      Recursively list subdirectories encountered.  See also -d.
 
      -r      Reverse the order of the sort to get reverse lexicographical
              order or the smallest or oldest entries first.
@@ -102,15 +111,15 @@ DESCRIPTION
              output is to a terminal, a total sum for all the file sizes is
              output on a line before the listing.
 
-     -T      When used with the -l (the lowercase letter ``ell'') option, dis-
-             play complete time information for the file, including month,
+     -T      When used with the -l (the lowercase letter ``ell'') option,
+             display complete time information for the file, including month,
              day, hour, minute, second, and year.
 
-     -t      Sort by time modified (most recently modified first) before sort-
-             ing the operands by lexicographical order.
+     -t      Sort by time modified (most recently modified first) before
+             sorting the operands by lexicographical order.
 
      -u      Use time of last access, instead of last modification of the file
-             for sorting (-t) or printing (-l).
+             for printing (-l) or sorting (-t).  Overrides -c.
 
      -W      Display whiteouts when scanning directories.
 
@@ -120,25 +129,21 @@ DESCRIPTION
      -x      Multi-column output sorted across the page rather than down the
              page.
 
-     -1      (The numeric digit ``one'').  Force output to be one entry per
-             line.  This is the default when output is not to a terminal.
+     -X      Don't cross mount points when recursing.
 
-     The -B, -b, -w, and -q options all override each other; the last one
+     The -B, -b, -q, and -w options all override each other; the last one
      specified determines the format used for non-printable characters.
 
      The -1, -C, -g, -l, -m, and -x options all override each other; the last
      one specified determines the format used with the exception that if both
-     -l and -g are specified, -l will always override -g, even if -g was spec-
-     ified last.
+     -l and -g are specified, -l will always override -g, even if -g was
+     specified last.
 
-     The -c and -u options override each other; the last one specified deter-
-     mines the file time used.
+     By default, ls lists one entry per line to standard output; the
+     exceptions are to terminals or when the -C or -m options are specified.
 
-     By default, ls lists one entry per line to standard output; the excep-
-     tions are to terminals or when the -C or -m options are specified.
-
-     File information is displayed with one or more <blank> separating the
-     information associated with the -i, -s, and -l options.
+     File information is displayed with one or more <blank> characters
+     separating the information associated with the -i, -l, and -s options.
 
    The Long Format
      If the -l option is given, the following information is displayed for
@@ -155,36 +160,36 @@ DESCRIPTION
            pathname
 
      In addition, for each directory whose contents are displayed, the total
-     number of 512-byte blocks used by the files in the directory is displayed
-     on a line by itself immediately before the information for the files in
-     the directory.
+     number of file system blocks in units of 512 bytes or BLOCKSIZE (see
+     ENVIRONMENT) used by the files in the directory is displayed on a line by
+     itself immediately before the information for the files in the directory.
 
      If the owner or group names are not a known owner or group name, or the
      -n option is given, the numeric ID's are displayed.
 
      If the file is a character special or block special file, the major and
      minor device numbers for the file are displayed in the size field.  If
-     the file is a symbolic link the pathname of the linked-to file is pre-
-     ceded by ``->''.
+     the file is a symbolic link the pathname of the linked-to file is
+     preceded by ``->''.
 
      The file mode printed under the -l option consists of the entry type,
      owner permissions, group permissions, and other permissions.  The entry
      type character describes the type of file, as follows:
 
+           -     Regular file.
            a     Archive state 1.
            A     Archive state 2.
            b     Block special file.
            c     Character special file.
            d     Directory.
            l     Symbolic link.
-           s     Socket link.
            p     FIFO.
+           s     Socket link.
            w     Whiteout.
-           -     Regular file.
 
      The next three fields are three characters each: owner permissions, group
-     permissions, and other permissions.  Each field has three character posi-
-     tions:
+     permissions, and other permissions.  Each field has three character
+     positions:
 
            1.   If r, the file is readable; if -, it is not readable.
 
@@ -192,21 +197,21 @@ DESCRIPTION
 
            3.   The first of the following that applies:
 
-                      S     If in the owner permissions, the file is not exe-
-                            cutable and set-user-ID mode is set.  If in the
+                      S     If in the owner permissions, the file is not
+                            executable and set-user-ID mode is set.  If in the
                             group permissions, the file is not executable and
                             set-group-ID mode is set.
 
-                      s     If in the owner permissions, the file is exe-
-                            cutable and set-user-ID mode is set.  If in the
-                            group permissions, the file is executable and set-
-                            group-ID mode is set.
+                      s     If in the owner permissions, the file is
+                            executable and set-user-ID mode is set.  If in the
+                            group permissions, the file is executable and
+                            setgroup-ID mode is set.
 
-                      x     The file is executable or the directory is search-
-                            able.
+                      x     The file is executable or the directory is
+                            searchable.
 
-                      -     The file is neither readable, writable, exe-
-                            cutable, nor set-user-ID nor set-group-ID mode,
+                      -     The file is neither readable, writable,
+                            executable, nor set-user-ID nor set-group-ID mode,
                             nor sticky.  (See below.)
 
                 These next two apply only to the third character in the last
@@ -216,25 +221,26 @@ DESCRIPTION
                             or search permission.  (See chmod(1) or
                             sticky(7).)
 
-                      t     The sticky bit is set (mode 1000), and is search-
-                            able or executable.  (See chmod(1) or sticky(7).)
+                      t     The sticky bit is set (mode 1000), and is
+                            searchable or executable.  (See chmod(1) or
+                            sticky(7).)
 
      The number of bytes displayed for a directory is a function of the number
-     of dirent(3) structures in the directory, not all of which may be allo-
-     cated to any existing file.
+     of dirent(3) structures in the directory, not all of which may be
+     allocated to any existing file.
 
 ENVIRONMENT
      The following environment variables affect the execution of ls:
 
-     BLOCKSIZE  If the environment variable BLOCKSIZE is set, and the -h and
-                -k options are not specified, the block counts (see -s) will
+     BLOCKSIZE  If the environment variable BLOCKSIZE is set, and the -k
+                option is not specified, the block counts (see -l and -s) will
                 be displayed in units of that size block.
 
      COLUMNS    If this variable contains a string representing a decimal
-                integer, it is used as the column position width for display-
-                ing multiple-text-column output.  The ls utility calculates
-                how many pathname text columns to display based on the width
-                provided.  (See -C.)
+                integer, it is used as the column position width for
+                displaying multiple-text-column output.  The ls utility
+                calculates how many pathname text columns to display based on
+                the width provided.  (See -C.)
 
      TZ         The timezone to use when displaying dates.  See environ(7) for
                 more information.
@@ -258,4 +264,4 @@ STANDARDS
 HISTORY
      An ls utility appeared in Version 5 AT&T UNIX.
 
-NetBSD 6.0                       April 2, 2011                      NetBSD 6.0
+NetBSD 7.0.1                     April 2, 2014                    NetBSD 7.0.1
