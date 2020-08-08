@@ -6,23 +6,23 @@ NAME
        tee - read from standard input and write to standard output and files
 
 SYNOPSIS
-tee 22m[4mOPTION24m]... [4mFILE24m]...
+tee [OPTION]... [FILE]...
 
 DESCRIPTION
        Copy standard input to each FILE, and also to standard output.
 
--a22m, 1m--append
+-a, 1m--append
               append to the given FILEs, do not overwrite
 
--i22m, 1m--ignore-interrupts
+-i, 1m--ignore-interrupts
               ignore interrupt signals
 
--p     22mdiagnose errors writing to non pipes
+-p     diagnose errors writing to non pipes
 
---output-error22m[=4mMODE24m]
+--output-error[=MODE]
               set behavior on write error.  See MODE below
 
---help 22mdisplay this help and exit
+--help display this help and exit
 
 --version
               output version information and exit
@@ -38,8 +38,8 @@ MODE determines behavior with write errors on the outputs:
        'exit-nopipe'
               exit on error writing to any output not a pipe
 
-       The default MODE for the 1m-p 22moption is 'warn-nopipe'.  The default oper-
-       ation when 1m--output-error 22mis not specified, is to exit  immediately  on
+       The default MODE for the 1m-p option is 'warn-nopipe'.  The default oper-
+       ation when 1m--output-error is not specified, is to exit  immediately  on
        error  writing  to a pipe, and diagnose errors writing to non pipe out-
        puts.
 
