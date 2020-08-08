@@ -1,0 +1,65 @@
+TEE(1)                           User Commands                          TEE(1)
+
+
+
+1mNAME0m
+       tee - read from standard input and write to standard output and files
+
+1mSYNOPSIS0m
+       1mtee 22m[4mOPTION24m]... [4mFILE24m]...
+
+1mDESCRIPTION0m
+       Copy standard input to each FILE, and also to standard output.
+
+       1m-a22m, 1m--append0m
+              append to the given FILEs, do not overwrite
+
+       1m-i22m, 1m--ignore-interrupts0m
+              ignore interrupt signals
+
+       1m-p     22mdiagnose errors writing to non pipes
+
+       1m--output-error22m[=4mMODE24m]
+              set behavior on write error.  See MODE below
+
+       1m--help 22mdisplay this help and exit
+
+       1m--version0m
+              output version information and exit
+
+   1mMODE determines behavior with write errors on the outputs:0m
+       'warn' diagnose errors writing to any output
+
+       'warn-nopipe'
+              diagnose errors writing to any output not a pipe
+
+       'exit' exit on error writing to any output
+
+       'exit-nopipe'
+              exit on error writing to any output not a pipe
+
+       The default MODE for the 1m-p 22moption is 'warn-nopipe'.  The default oper-
+       ation when 1m--output-error 22mis not specified, is to exit  immediately  on
+       error  writing  to a pipe, and diagnose errors writing to non pipe out-
+       puts.
+
+1mAUTHOR0m
+       Written by Mike Parker, Richard M. Stallman, and David MacKenzie.
+
+1mREPORTING BUGS0m
+       GNU coreutils online help: <https://www.gnu.org/software/coreutils/>
+       Report tee translation bugs to <https://translationproject.org/team/>
+
+1mCOPYRIGHT0m
+       Copyright (C) 2017 Free Software Foundation, Inc.  License GPLv3+:  GNU
+       GPL version 3 or later <https://gnu.org/licenses/gpl.html>.
+       This  is  free  software:  you  are free to change and redistribute it.
+       There is NO WARRANTY, to the extent permitted by law.
+
+1mSEE ALSO0m
+       Full documentation at: <https://www.gnu.org/software/coreutils/tee>
+       or available locally via: info '(coreutils) tee invocation'
+
+
+
+GNU coreutils 8.29               February 2018                          TEE(1)
