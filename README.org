@@ -15,9 +15,4 @@
 
 * Overview
 
-  Example repository for testing out SVN[fn:1].
-
-* Footnotes
-
-[fn:1] https://subversion.apache.org/
-
+  Example repository for testing out [[https://subversion.apache.org/][Subversion]].
