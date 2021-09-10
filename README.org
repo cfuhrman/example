@@ -16,3 +16,6 @@
 * Overview
 
   Example repository for testing out [[https://subversion.apache.org/][Subversion]].
+
+  There really isn't anything else to it!
+  
